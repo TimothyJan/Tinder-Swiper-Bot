@@ -12,9 +12,6 @@ FB_PASSWORD = "INPUT PASSWORD HERE"
 
 URL = "https://tinder.com/"
 
-# options = webdriver.ChromeOptions() 
-# options.add_argument("user-data-dir=C:\\Users\\janti\\AppData\\Local\\Google\\Chrome\\User Data")
-# w = webdriver.Chrome(executable_path="C:\Program Files (x86)\Google\Chrome\Application\chrome.exe", chrome_options=options)
 CHROME_DRIVER_PATH = "C:\\Development\\chromedriver.exe"
 driver = webdriver.Chrome(executable_path=CHROME_DRIVER_PATH)
 time.sleep(2)
@@ -60,20 +57,21 @@ cookies.click()
 time.sleep(3)
 for n in range(100):
 
-    #Add a 1 second delay between likes.
+    #Add a 2 second delay between likes.
     time.sleep(2)
 
     try:
         like_button = driver.find_element_by_xpath(
             '//*[@id="t-828363795"]/div/div[1]/div/main/div[1]/div/div/div[1]/div[1]/div/div[4]/div/div[4]/button/span/span')
         like_button.click()
-    #Catches the cases where there is a "Matched" pop-up in front of the "Like" button:
     except:
+        #Tinder changes xpath after first like
         try:
             like_button_post = driver.find_element_by_xpath(
                 '//*[@id="t-828363795"]/div/div[1]/div/main/div[1]/div/div/div[1]/div[1]/div/div[5]/div/div[4]/button/span/span')
             like_button_post.click()
         except:
+            #Catches the cases where there is a "Matched" pop-up in front of the "Like" button:
             try:
                 match_popup = driver.find_element_by_xpath('//*[@id="t1738222425"]/div/div/div[1]/div/div[4]/button')
                 match_popup.click()
